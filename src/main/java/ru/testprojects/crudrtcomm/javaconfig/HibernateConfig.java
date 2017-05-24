@@ -3,7 +3,6 @@ package ru.testprojects.crudrtcomm.javaconfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -26,13 +25,13 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = {"classpath:postgres.properties"})
+@PropertySource(value = {"classpath:hsqldb.properties"})
 @EnableJpaRepositories(basePackages = "ru.testprojects.crudrtcomm.repository")
 public class HibernateConfig {
 
     private final Environment environment;
 
-    @Value("classpath:initDB.sql")
+    @Value("classpath:initDB_hsql.sql")
     private Resource initDbScript;
 
     @Autowired
