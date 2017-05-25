@@ -21,4 +21,5 @@ INSERT INTO todos (description, start_date, end_date) VALUES
   ('test quest', '2017-05-22 10:00:00', '2017-05-26 18:00:00');
 
 INSERT INTO todos (description) VALUES
-  ('start toDo');
+  ('start toDo'),
+  ('hren todo');

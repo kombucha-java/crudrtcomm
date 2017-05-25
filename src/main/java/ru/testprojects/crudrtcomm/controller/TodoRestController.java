@@ -12,14 +12,14 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(MainController.REST_URL)
-public class MainController {
-    static final String REST_URL = "/main";
+@RequestMapping(TodoRestController.REST_URL)
+public class TodoRestController {
+    static final String REST_URL = "/rest";
 
     private final ToDoRepository repository;
 
     @Autowired
-    public MainController(ToDoRepository repository) {
+    public TodoRestController(ToDoRepository repository) {
         this.repository = repository;
     }
 

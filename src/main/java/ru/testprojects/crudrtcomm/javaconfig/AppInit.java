@@ -3,8 +3,7 @@ package ru.testprojects.crudrtcomm.javaconfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
-    // Этот метод должен содержать конфигурации которые инициализируют Beans
-    // для инициализации бинов у нас использовалась аннотация @Bean
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[]{
