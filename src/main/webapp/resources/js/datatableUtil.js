@@ -1,4 +1,4 @@
-var restUrl = 'rest/';
+var restUrl = "rest/";
 var datatableApi;
 var form;
 
@@ -79,10 +79,10 @@ function add() {
 function deleteRow(id) {
     $.ajax({
         url: restUrl + id,
-        type: 'DELETE',
+        type: "DELETE",
         success: function () {
             updateTable();
-            successNoty('Deleted');
+            successNoty("Deleted");
         }
     });
 }
@@ -110,12 +110,11 @@ function save() {
     $.ajax({
         type: "POST",
         url: restUrl,
-        //contentType :   'application/json',
         data: form.serialize(),
         success: function () {
-            $('#editRow').modal('hide');
+            $('#editRow').modal("hide");
             updateTable();
-            successNoty('Saved');
+            successNoty("Saved");
         }
     });
 }
@@ -133,8 +132,8 @@ function successNoty(text) {
     closeNoty();
     noty({
         text: text,
-        type: 'success',
-        layout: 'bottomRight',
+        type: "success",
+        layout: "bottomRight",
         timeout: 1500
     });
 }
@@ -142,8 +141,8 @@ function successNoty(text) {
 function failNoty(jqXHR) {
     closeNoty();
     failedNote = noty({
-        text: 'Error status: ' + jqXHR.status + (jqXHR.responseJSON ? '<br>' + jqXHR.responseJSON : ''),
-        type: 'error',
-        layout: 'bottomRight'
+        text: "Error status: " + jqXHR.status,
+        type: "error",
+        layout: "bottomRight"
     });
 }

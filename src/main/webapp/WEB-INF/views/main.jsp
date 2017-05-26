@@ -12,7 +12,6 @@
     <script type="text/javascript" src="webjars/datatables/1.10.15/media/js/dataTables.bootstrap.min.js" defer></script>
     <script type="text/javascript" src="webjars/noty/2.4.1/js/noty/packaged/jquery.noty.packaged.min.js" defer></script>
     <script type="text/javascript" src="resources/js/datatableUtil.js" defer></script>
-    <script type="text/javascript" src="resources/js/todoUtil.js" defer></script>
 
 </head>
 <body>

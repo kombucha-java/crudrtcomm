@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.SerializationConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import ru.testprojects.crudrtcomm.util.DateTimeFormatters;
 import ru.testprojects.crudrtcomm.util.JacksonObjectMapper;
 
 import java.util.Arrays;
@@ -27,9 +25,6 @@ import java.util.List;
 @ComponentScan(basePackages = "ru.testprojects.crudrtcomm")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    private DateTimeFormatters.LocalDateFormatter dateFormatter = new DateTimeFormatters.LocalDateFormatter();
-
-    private DateTimeFormatters.LocalTimeFormatter timeFormatter = new DateTimeFormatters.LocalTimeFormatter();
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
@@ -46,13 +41,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 MediaType.parseMediaType("text/html;charset=UTF-8")));
         converters.add(converter);
         converters.add(messageConverter);
-    }
-
-
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        registry.addFormatter(dateFormatter);
-        registry.addFormatter(timeFormatter);
     }
 
     @Bean

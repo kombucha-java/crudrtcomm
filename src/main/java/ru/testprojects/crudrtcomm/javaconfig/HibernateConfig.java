@@ -25,13 +25,13 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = {"classpath:postgres.properties"})
+@PropertySource(value = {"classpath:hsqldb.properties"})
 @EnableJpaRepositories(basePackages = "ru.testprojects.crudrtcomm.repository")
 public class HibernateConfig {
 
     private final Environment environment;
 
-    @Value("classpath:initDB.sql")
+    @Value("classpath:initDB_hsql.sql")
     private Resource initDbScript;
 
     @Autowired

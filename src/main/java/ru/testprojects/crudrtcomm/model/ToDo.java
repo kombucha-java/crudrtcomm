@@ -1,14 +1,9 @@
 package ru.testprojects.crudrtcomm.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "todos")
@@ -25,12 +20,9 @@ public class ToDo {
     private String description;
 
     @Column(name = "start_date", nullable = false, columnDefinition = "timestamp default now()")
-    @NotNull
     private LocalDateTime startDate;
 
     @Column(name = "end_date", nullable = false, columnDefinition = "timestamp default now()")
-    @NotNull
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime endDate;
 
     public ToDo() {
