@@ -1,15 +1,17 @@
 package ru.testprojects.crudrtcomm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.testprojects.crudrtcomm.model.ToDo;
 import ru.testprojects.crudrtcomm.repository.ToDoRepository;
 
-import javax.validation.Valid;
+import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -40,14 +42,19 @@ public class TodoRestController {
     }
 
     @PostMapping
-    public ResponseEntity<String> create(@Valid ToDo toDo, BindingResult result) {
-        if (result.hasErrors()) {
-            StringBuilder sb = new StringBuilder();
-            result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
-            return new ResponseEntity<>(sb.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
+    public ResponseEntity<ToDo> createOrUpdate
+            (@RequestParam("id") Integer id,
+             @RequestParam("description") String description,
+             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+             @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        if (description == null || startDate == null || endDate == null) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
-
+        ToDo toDo = new ToDo(id, description, startDate, endDate);
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(toDo.getId()).toUri();
         repository.save(toDo);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.created(uriOfNewResource).body(toDo);
     }
 }
