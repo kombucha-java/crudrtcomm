@@ -1,8 +1,13 @@
 package ru.testprojects.crudrtcomm.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -20,10 +25,13 @@ public class ToDo {
     private String description;
 
     @Column(name = "start_date", nullable = false, columnDefinition = "timestamp default now()")
-    private Date startDate;
+    @NotNull
+    private LocalDateTime startDate;
 
     @Column(name = "end_date", nullable = false, columnDefinition = "timestamp default now()")
-    private Date endDate;
+    @NotNull
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime endDate;
 
     public ToDo() {
 
@@ -33,7 +41,7 @@ public class ToDo {
         return this.getId() == null;
     }
 
-    public ToDo(Integer id, String description, Date startDate, Date endDate) {
+    public ToDo(Integer id, String description, LocalDateTime startDate, LocalDateTime endDate) {
         this.id = id;
         this.description = description;
         this.startDate = startDate;
@@ -42,13 +50,13 @@ public class ToDo {
 
     public ToDo(String description) {
         this.description = description;
-        this.startDate = new Date();
-        this.endDate = new Date();
+        this.startDate = LocalDateTime.now();
+        this.endDate = LocalDateTime.now();
     }
 
-    public ToDo(String description, Date endDate) {
+    public ToDo(String description, LocalDateTime endDate) {
         this.description = description;
-        this.startDate = new Date();
+        this.startDate = LocalDateTime.now();
         this.endDate = endDate;
     }
 
@@ -68,19 +76,19 @@ public class ToDo {
         this.description = description;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 }

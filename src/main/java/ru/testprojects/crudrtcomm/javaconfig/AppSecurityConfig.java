@@ -23,6 +23,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/main/**").access("hasRole('ROLE_ADMIN')")
                 .and().formLogin().defaultSuccessUrl("/", false);
-
+        http.csrf().disable();
     }
 }
